@@ -1,4 +1,4 @@
-const CACHE_NAME = "ubieranko-v1";
+const CACHE_NAME = "ubieranko-v2";
 
 const PRECACHE_URLS = [
   "./",

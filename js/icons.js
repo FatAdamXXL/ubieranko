@@ -27,6 +27,8 @@ const ICONS = {
   music_note: '<path fill="currentColor" d="M9,3 v10.2 a3.5,3.5 0 1 0 2,3.16 V8 h5 V3 Z"/>',
   lock: '<path fill="currentColor" d="M7,10 V8 a5,5 0 0 1 10,0 v2 h1 a1,1 0 0 1 1,1 v9 a1,1 0 0 1 -1,1 H6 a1,1 0 0 1 -1,-1 v-9 a1,1 0 0 1 1,-1 Z M9,10 h6 V8 a3,3 0 0 0 -6,0 Z"/>',
   check: '<path fill="currentColor" d="M9,16.2 L4.8,12 L3.4,13.4 L9,19 L21,7 L19.6,5.6 Z"/>',
+  download: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12,3 v10 M7,9 l5,5 l5,-5 M5,19 h14"/>',
+  ios_share: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12,2 v13 M8,6 l4,-4 l4,4 M5,10 v10 h14 v-10"/>',
 };
 
 function iconEl(name, size) {

@@ -236,6 +236,35 @@ button {
 .mainmenu__title.in {
   animation: menu-fade-down 0.4s ease forwards;
 }
+.mainmenu__install {
+  width: 100%;
+  margin-top: 20px;
+}
+.install-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  padding: 14px 18px;
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.install-banner .icon { width: 20px; height: 20px; }
+.install-banner--hint {
+  cursor: default;
+  font-weight: 500;
+  font-size: 14px;
+  background: var(--surface-container);
+  color: var(--on-surface-variant);
+  text-align: left;
+}
+
 .mainmenu__buttons {
   margin-top: 64px;
   width: 100%;

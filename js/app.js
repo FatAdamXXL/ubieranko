@@ -28,6 +28,57 @@ class AudioController {
 }
 const musicPlayer = new AudioController();
 
+/* ---------- Install prompt (Chrome/Android via beforeinstallprompt; iOS Safari has no such
+   API, so it gets a manual-steps hint instead) ---------- */
+const InstallController = {
+  deferredEvent: null,
+  iosHint: false,
+  _listeners: [],
+
+  init() {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      this.deferredEvent = e;
+      this._notify();
+    });
+    window.addEventListener("appinstalled", () => {
+      this.deferredEvent = null;
+      this._notify();
+    });
+    const ua = navigator.userAgent;
+    const isIos = /iphone|ipad|ipod/i.test(ua) && !window.MSStream;
+    const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+    this.iosHint = isIos && isSafari;
+  },
+
+  isStandalone() {
+    return window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  },
+
+  canPromptInstall() {
+    return !!this.deferredEvent && !this.isStandalone();
+  },
+
+  showIosHint() {
+    return this.iosHint && !this.isStandalone() && !this.deferredEvent;
+  },
+
+  subscribe(fn) {
+    this._listeners.push(fn);
+    return () => { this._listeners = this._listeners.filter((l) => l !== fn); };
+  },
+
+  _notify() { this._listeners.forEach((fn) => fn()); },
+
+  async promptInstall() {
+    if (!this.deferredEvent) return;
+    this.deferredEvent.prompt();
+    try { await this.deferredEvent.userChoice; } catch {}
+    this.deferredEvent = null;
+    this._notify();
+  },
+};
+
 /* ---------- Theme ---------- */
 function applyTheme(dark) {
   document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
@@ -60,6 +111,7 @@ function renderMainMenu(root) {
     <div class="screen mainmenu">
       <button class="icon-btn mainmenu__mute" id="muteBtn"></button>
       <div class="mainmenu__title" id="title">Ubieranko</div>
+      <div class="mainmenu__install" id="installBanner"></div>
       <div class="mainmenu__buttons" id="buttons">
         <button class="btn" id="btnStart">${iconHtml("checkroom")}<span>Zacznij się ubierać</span></button>
         <button class="btn btn--tertiary" id="btnProgress">${iconHtml("trophy")}<span>Mapa nagród</span></button>
@@ -105,7 +157,21 @@ function renderMainMenu(root) {
   root.querySelector("#btnSettings").addEventListener("click", () => navigate("settings"));
   root.querySelector("#btnExit").addEventListener("click", onExit);
 
-  return { unmount() { unsub(); } };
+  const installBanner = root.querySelector("#installBanner");
+  function renderInstallBanner() {
+    if (InstallController.canPromptInstall()) {
+      installBanner.innerHTML = `<button class="install-banner" id="installBtn">${iconHtml("download")}<span>Zainstaluj aplikację</span></button>`;
+      installBanner.querySelector("#installBtn").addEventListener("click", () => InstallController.promptInstall());
+    } else if (InstallController.showIosHint()) {
+      installBanner.innerHTML = `<div class="install-banner install-banner--hint">${iconHtml("ios_share")}<span>Aby zainstalować: Udostępnij &rarr; Dodaj do ekranu początkowego</span></div>`;
+    } else {
+      installBanner.innerHTML = "";
+    }
+  }
+  renderInstallBanner();
+  const unsubInstall = InstallController.subscribe(renderInstallBanner);
+
+  return { unmount() { unsub(); unsubInstall(); } };
 }
 
 /* ---------- Screen: Dressing ---------- */
@@ -554,6 +620,7 @@ function navigate(screen) {
 
 /* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
+  InstallController.init();
   applyTheme(SettingsStore.get().darkTheme);
   SettingsStore.subscribe((s) => applyTheme(s.darkTheme));
 
