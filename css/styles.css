@@ -595,3 +595,15 @@ input[type="range"] {
   transition: opacity 0.2s ease;
 }
 .toast.show { opacity: 1; }
+
+/* ---------- version badge ---------- */
+.version-badge {
+  position: fixed;
+  right: 8px;
+  bottom: 6px;
+  font-size: 11px;
+  color: var(--on-surface-variant);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 5;
+}
