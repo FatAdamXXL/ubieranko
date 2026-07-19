@@ -1,6 +1,7 @@
-const CACHE_NAME = "ubieranko-v4";
+const CACHE_NAME = "ubieranko-v5";
 
-const PRECACHE_URLS = [
+// Small and fast — safe to cache atomically at install time.
+const SHELL_URLS = [
   "./",
   "index.html",
   "manifest.webmanifest",
@@ -19,6 +20,11 @@ const PRECACHE_URLS = [
   "assets/icons/spodnie.svg",
   "assets/icons/skarpetki.svg",
   "assets/icons/bluza.svg",
+];
+
+// ~13MB across 34 files — fetched individually in the background after activation so one
+// flaky download (common on mobile data) can't fail the whole precache like cache.addAll would.
+const AUDIO_URLS = [
   "assets/audio/majtki.mp3",
   "assets/audio/podkoszulka.mp3",
   "assets/audio/koszulka.mp3",
@@ -58,16 +64,38 @@ const PRECACHE_URLS = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_URLS)).then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    ).then(() => self.clients.claim())
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
+      .then(() => cacheAudioInBackground())
   );
+});
+
+function cacheAudioInBackground() {
+  return caches.open(CACHE_NAME).then((cache) =>
+    Promise.allSettled(
+      AUDIO_URLS.map((url) =>
+        cache.match(url).then((existing) => {
+          if (existing) return;
+          return fetch(url).then((response) => {
+            if (response.ok) return cache.put(url, response);
+          });
+        })
+      )
+    )
+  );
+}
+
+self.addEventListener("message", (event) => {
+  if (event.data === "cache-audio") {
+    event.waitUntil(cacheAudioInBackground());
+  }
 });
 
 self.addEventListener("fetch", (event) => {

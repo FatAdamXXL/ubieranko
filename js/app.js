@@ -1,7 +1,7 @@
 /* Version convention mirrors the Android original: MAJOR.MILESTONE.PATCH starting at 0.000.001.
    Bump the third group for routine fixes, the second (resetting the third to 000) for
    milestones/new features. This PWA has its own independent history from the Android app. */
-const APP_VERSION = "0.001.002";
+const APP_VERSION = "0.001.003";
 
 /* ---------- Audio (mirrors AppMusicPlayer: one looping player, swap src, volume-based mute) ---------- */
 class AudioController {
@@ -651,5 +651,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(() => {});
+    // Retries any audio tracks that failed to cache on a previous visit (e.g. flaky mobile
+    // data) — cheap when everything is already cached since the SW skips existing entries.
+    navigator.serviceWorker.ready.then((reg) => {
+      if (reg.active) reg.active.postMessage("cache-audio");
+    }).catch(() => {});
   }
 });
