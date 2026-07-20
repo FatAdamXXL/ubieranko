@@ -1,3 +1,8 @@
+/** Testing-only override: while true, every song pack shows as unlocked regardless of points —
+ *  points still accumulate normally underneath. Set back to false to re-enable the point gate
+ *  before a public launch. */
+const FORCE_UNLOCK_ALL_PACKS = true;
+
 const SongPacks = {
   DEFAULT_ID: "domyslny",
 
@@ -14,6 +19,7 @@ const SongPacks = {
   },
 
   isUnlocked(pack, completedCount) {
+    if (FORCE_UNLOCK_ALL_PACKS) return true;
     return completedCount >= pack.unlockAtPoints;
   },
 };

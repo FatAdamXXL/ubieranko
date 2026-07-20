@@ -1,7 +1,7 @@
 /* Version convention mirrors the Android original: MAJOR.MILESTONE.PATCH starting at 0.000.001.
    Bump the third group for routine fixes, the second (resetting the third to 000) for
    milestones/new features. This PWA has its own independent history from the Android app. */
-const APP_VERSION = "0.001.003";
+const APP_VERSION = "0.001.004";
 
 /* ---------- Audio (mirrors AppMusicPlayer: one looping player, swap src, volume-based mute) ---------- */
 class AudioController {
@@ -553,7 +553,7 @@ function renderProgression(root) {
   function render() {
     const s = SettingsStore.get();
     pointsLine.textContent = `Punkty: ${s.completedCount}`;
-    const nextLocked = SongPacks.ALL.find((p) => p.unlockAtPoints > s.completedCount);
+    const nextLocked = SongPacks.ALL.find((p) => !SongPacks.isUnlocked(p, s.completedCount));
     nextLine.textContent = nextLocked
       ? `Jeszcze ${nextLocked.unlockAtPoints - s.completedCount} pkt do: ${nextLocked.name}`
       : "Wszystkie zestawy odblokowane!";
