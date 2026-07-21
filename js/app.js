@@ -1,7 +1,7 @@
 /* Version convention mirrors the Android original: MAJOR.MILESTONE.PATCH starting at 0.000.001.
    Bump the third group for routine fixes, the second (resetting the third to 000) for
    milestones/new features. This PWA has its own independent history from the Android app. */
-const APP_VERSION = "0.002.000";
+const APP_VERSION = "0.002.001";
 
 /* ---------- Audio (mirrors AppMusicPlayer: one looping player, swap src, volume-based mute) ---------- */
 class AudioController {
@@ -181,7 +181,7 @@ function renderMainMenu(root) {
   const counterEl = root.querySelector("#globalCounter");
   GlobalStats.fetchRoutinesCompleted().then((count) => {
     if (!mounted || count === null) return;
-    counterEl.textContent = `Ubrano się już ${count} ${polishTimesWord(count)}!`;
+    counterEl.textContent = `Na całym świecie ubrano się już ${count} ${polishTimesWord(count)} z aplikacją Ubieranko`;
   });
 
   return { unmount() { mounted = false; unsub(); unsubInstall(); } };
