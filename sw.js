@@ -1,4 +1,4 @@
-const CACHE_NAME = "ubieranko-v8";
+const CACHE_NAME = "ubieranko-v9";
 
 // Small and fast — safe to cache atomically at install time.
 const SHELL_URLS = [
@@ -64,8 +64,15 @@ const AUDIO_URLS = [
 ];
 
 self.addEventListener("install", (event) => {
+  // cache.addAll() lets the browser's own HTTP cache satisfy these fetches, which can smuggle
+  // a stale pre-deploy copy of a file straight into the SW cache. Fetching with {cache:
+  // "reload"} forces each one to actually hit the network so precache always has the latest.
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_URLS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME)
+      .then((cache) =>
+        Promise.all(SHELL_URLS.map((url) => fetch(url, { cache: "reload" }).then((response) => cache.put(url, response))))
+      )
+      .then(() => self.skipWaiting())
   );
 });
 
