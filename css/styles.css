@@ -265,6 +265,14 @@ button {
   text-align: left;
 }
 
+.mainmenu__counter {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  text-align: center;
+  min-height: 1.2em;
+}
+
 .mainmenu__buttons {
   margin-top: 64px;
   width: 100%;

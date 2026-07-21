@@ -1,4 +1,4 @@
-const CACHE_NAME = "ubieranko-v6";
+const CACHE_NAME = "ubieranko-v7";
 
 // Small and fast — safe to cache atomically at install time.
 const SHELL_URLS = [
@@ -10,6 +10,7 @@ const SHELL_URLS = [
   "js/songpacks.js",
   "js/storage.js",
   "js/icons.js",
+  "js/stats.js",
   "js/app.js",
   "icons/icon-192.png",
   "icons/icon-512.png",
@@ -100,6 +101,10 @@ self.addEventListener("message", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  // Only manage caching for our own static assets. Cross-origin calls (Supabase's REST API,
+  // its CDN-hosted client library) go straight to the network — live/dynamic data must never
+  // be served stale from cache, and caching it would grow the cache with junk indefinitely.
+  if (new URL(event.request.url).origin !== self.location.origin) return;
 
   event.respondWith(
     caches.match(event.request).then((cached) => {

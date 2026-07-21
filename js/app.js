@@ -1,7 +1,7 @@
 /* Version convention mirrors the Android original: MAJOR.MILESTONE.PATCH starting at 0.000.001.
    Bump the third group for routine fixes, the second (resetting the third to 000) for
    milestones/new features. This PWA has its own independent history from the Android app. */
-const APP_VERSION = "0.001.004";
+const APP_VERSION = "0.002.000";
 
 /* ---------- Audio (mirrors AppMusicPlayer: one looping player, swap src, volume-based mute) ---------- */
 class AudioController {
@@ -123,6 +123,7 @@ function renderMainMenu(root) {
         <button class="btn btn--secondary" id="btnSettings">${iconHtml("gear")}<span>Ustawienia</span></button>
         <button class="btn btn--error" id="btnExit">${iconHtml("exit")}<span>Zakończ</span></button>
       </div>
+      <div class="mainmenu__counter" id="globalCounter"></div>
     </div>`;
 
   const title = root.querySelector("#title");
@@ -176,7 +177,20 @@ function renderMainMenu(root) {
   renderInstallBanner();
   const unsubInstall = InstallController.subscribe(renderInstallBanner);
 
-  return { unmount() { unsub(); unsubInstall(); } };
+  let mounted = true;
+  const counterEl = root.querySelector("#globalCounter");
+  GlobalStats.fetchRoutinesCompleted().then((count) => {
+    if (!mounted || count === null) return;
+    counterEl.textContent = `Ubrano się już ${count} ${polishTimesWord(count)}!`;
+  });
+
+  return { unmount() { mounted = false; unsub(); unsubInstall(); } };
+}
+
+/** "raz" only for exactly 1, "razy" for every other count (2, 5, 21, ...) — "razy" doesn't
+ *  inflect further, unlike most Polish count nouns. */
+function polishTimesWord(count) {
+  return count === 1 ? "raz" : "razy";
 }
 
 /* ---------- Screen: Dressing ---------- */
@@ -342,6 +356,7 @@ function renderDressing(root) {
     updateTopbar();
     syncAudio();
     SettingsStore.incrementCompletedCount();
+    GlobalStats.incrementRoutinesCompleted();
     completeTimeout = setTimeout(() => navigate("mainmenu"), 2200);
   }
 
