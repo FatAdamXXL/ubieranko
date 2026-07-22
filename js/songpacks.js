@@ -36,6 +36,7 @@ const packTracks = {
     koszulka: "assets/audio/koszulka.mp3",
     spodnie: "assets/audio/spodnie.mp3",
     skarpetki: "assets/audio/skarpetki.mp3",
+    buty: "assets/audio/buty.mp3",
     bluza: "assets/audio/bluza.mp3",
   },
   country: {
@@ -44,6 +45,7 @@ const packTracks = {
     koszulka: "assets/audio/country_koszulka.mp3",
     spodnie: "assets/audio/country_spodnie.mp3",
     skarpetki: "assets/audio/country_skarpetki.mp3",
+    buty: "assets/audio/country_buty.mp3",
     bluza: "assets/audio/country_bluza.mp3",
   },
   disco: {
@@ -52,6 +54,7 @@ const packTracks = {
     koszulka: "assets/audio/disco_koszulka.mp3",
     spodnie: "assets/audio/disco_spodnie.mp3",
     skarpetki: "assets/audio/disco_skarpetki.mp3",
+    buty: "assets/audio/disco_buty.mp3",
     bluza: "assets/audio/disco_bluza.mp3",
   },
   kids_rock: {
@@ -60,6 +63,7 @@ const packTracks = {
     koszulka: "assets/audio/kids_rock_koszulka.mp3",
     spodnie: "assets/audio/kids_rock_spodnie.mp3",
     skarpetki: "assets/audio/kids_rock_skarpetki.mp3",
+    buty: "assets/audio/kids_rock_buty.mp3",
     bluza: "assets/audio/kids_rock_bluza.mp3",
   },
   opera: {
@@ -68,6 +72,7 @@ const packTracks = {
     koszulka: "assets/audio/opera_koszulka.mp3",
     spodnie: "assets/audio/opera_spodnie.mp3",
     skarpetki: "assets/audio/opera_skarpetki.mp3",
+    buty: "assets/audio/opera_buty.mp3",
     bluza: "assets/audio/opera_bluza.mp3",
   },
 };

@@ -5,6 +5,7 @@ const ClothingCatalog = {
     { id: "koszulka", label: "Ubierz koszulkę", icon: "koszulka" },
     { id: "spodnie", label: "Ubierz spodnie", icon: "spodnie" },
     { id: "skarpetki", label: "Ubierz skarpetki", icon: "skarpetki" },
+    { id: "buty", label: "Ubierz buty", icon: "buty" },
     { id: "bluza", label: "Ubierz bluzę", icon: "bluza" },
   ],
 

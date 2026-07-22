@@ -1,4 +1,4 @@
-const CACHE_NAME = "ubieranko-dev-v10";
+const CACHE_NAME = "ubieranko-dev-v11";
 
 // Small and fast — safe to cache atomically at install time.
 const SHELL_URLS = [
@@ -20,6 +20,7 @@ const SHELL_URLS = [
   "assets/icons/koszulka.svg",
   "assets/icons/spodnie.svg",
   "assets/icons/skarpetki.svg",
+  "assets/icons/buty.svg",
   "assets/icons/bluza.svg",
 ];
 
@@ -31,6 +32,7 @@ const AUDIO_URLS = [
   "assets/audio/koszulka.mp3",
   "assets/audio/spodnie.mp3",
   "assets/audio/skarpetki.mp3",
+  "assets/audio/buty.mp3",
   "assets/audio/bluza.mp3",
   "assets/audio/menu_theme.mp3",
   "assets/audio/country_majtki.mp3",
@@ -38,6 +40,7 @@ const AUDIO_URLS = [
   "assets/audio/country_koszulka.mp3",
   "assets/audio/country_spodnie.mp3",
   "assets/audio/country_skarpetki.mp3",
+  "assets/audio/country_buty.mp3",
   "assets/audio/country_bluza.mp3",
   "assets/audio/country_menu.mp3",
   "assets/audio/disco_majtki.mp3",
@@ -45,6 +48,7 @@ const AUDIO_URLS = [
   "assets/audio/disco_koszulka.mp3",
   "assets/audio/disco_spodnie.mp3",
   "assets/audio/disco_skarpetki.mp3",
+  "assets/audio/disco_buty.mp3",
   "assets/audio/disco_bluza.mp3",
   "assets/audio/disco_menu.mp3",
   "assets/audio/kids_rock_majtki.mp3",
@@ -52,6 +56,7 @@ const AUDIO_URLS = [
   "assets/audio/kids_rock_koszulka.mp3",
   "assets/audio/kids_rock_spodnie.mp3",
   "assets/audio/kids_rock_skarpetki.mp3",
+  "assets/audio/kids_rock_buty.mp3",
   "assets/audio/kids_rock_bluza.mp3",
   "assets/audio/kids_rock_menu.mp3",
   "assets/audio/opera_majtki.mp3",
@@ -59,6 +64,7 @@ const AUDIO_URLS = [
   "assets/audio/opera_koszulka.mp3",
   "assets/audio/opera_spodnie.mp3",
   "assets/audio/opera_skarpetki.mp3",
+  "assets/audio/opera_buty.mp3",
   "assets/audio/opera_bluza.mp3",
   "assets/audio/opera_menu.mp3",
 ];
