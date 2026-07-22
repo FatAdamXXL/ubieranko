@@ -1,7 +1,7 @@
 /* Version convention mirrors the Android original: MAJOR.MILESTONE.PATCH starting at 0.000.001.
    Bump the third group for routine fixes, the second (resetting the third to 000) for
    milestones/new features. This PWA has its own independent history from the Android app. */
-const APP_VERSION = "0.002.002";
+const APP_VERSION = "0.002.003";
 
 /* ---------- Audio (mirrors AppMusicPlayer: one looping player, swap src, volume-based mute) ---------- */
 class AudioController {
