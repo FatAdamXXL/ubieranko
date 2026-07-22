@@ -1,4 +1,4 @@
-const CACHE_NAME = "ubieranko-v10";
+const CACHE_NAME = "ubieranko-v11";
 
 // Small and fast — safe to cache atomically at install time.
 const SHELL_URLS = [
