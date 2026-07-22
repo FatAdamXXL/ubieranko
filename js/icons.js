@@ -7,7 +7,7 @@ const ICONS = {
   spodnie: '<path fill="currentColor" d="M6,2 H18 V7 L17,22 L13,22 L12,10 L11,22 L7,22 Z"/>',
   skarpetki: '<path fill="currentColor" d="M9,2 H14 V14 Q14,16 16,17 L20,19 Q22,20 21,22 H10 Q8,22 8,20 V4 Q8,2 9,2 Z"/>',
   bluza: '<path fill="currentColor" d="M8,4 L6,4 L2,9 L5,11 L5,21 L19,21 L19,11 L22,9 L18,4 L16,4 L16,2 Q12,0.5 8,2 Z"/><path fill="none" stroke="currentColor" stroke-width="0.8" d="M12,7 V21"/>',
-  buty: '<path fill="currentColor" d="M3,16 L3,13 L6,10 L9,11 L10,8 L13,7 L16,7 L16,10 L19,11 L21,13 L21,17 L3,17 Z"/>',
+  buty: '<path fill="currentColor" d="M3,17 Q2,14 3,11 Q6,9 10,10 L13,7 L17,7 Q20,7 20,11 L21,14 L21,17 Z"/>',
 
   checkroom: '<circle cx="12" cy="4" r="1.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12,5.4 V9"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4,17 L12,9 L20,17"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M5,18.3 H19"/>',
   trophy: '<path fill="currentColor" d="M6,4 H18 L16,11 H8 Z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6,5.5 H3.5 V8 L7.5,10"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M18,5.5 H20.5 V8 L16.5,10"/><rect x="11" y="11" width="2" height="4" fill="currentColor"/><rect x="8" y="15" width="8" height="2" fill="currentColor"/>',
