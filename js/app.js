@@ -119,7 +119,7 @@ function renderMainMenu(root) {
       <div class="mainmenu__install" id="installBanner"></div>
       <div class="mainmenu__buttons" id="buttons">
         <button class="btn" id="btnStart">${iconHtml("checkroom")}<span>Zacznij się ubierać</span></button>
-        <button class="btn btn--tertiary" id="btnProgress">${iconHtml("trophy")}<span>Mapa nagród</span></button>
+        <button class="btn btn--tertiary" id="btnProgress">${iconHtml("music_note")}<span>Motyw muzyczny</span></button>
         <button class="btn btn--secondary" id="btnSettings">${iconHtml("gear")}<span>Ustawienia</span></button>
         <button class="btn btn--error" id="btnExit">${iconHtml("exit")}<span>Zakończ</span></button>
       </div>
@@ -549,7 +549,7 @@ function renderProgression(root) {
     <div class="screen">
       <div class="topbar">
         <button class="icon-btn" id="backBtn"></button>
-        <div class="topbar__title">Mapa nagród</div>
+        <div class="topbar__title">Motyw muzyczny</div>
       </div>
       <div class="progression-header">
         <div class="progression-header__points" id="pointsLine"></div>
